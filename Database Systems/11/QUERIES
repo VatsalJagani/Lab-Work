@@ -1,0 +1,47 @@
+Insert into patients (pid,name,contact_no,address,city,marital_status,gender,birthdate,reg_by,reg_date) values(patientid_seq.nextval,:CONTACT,:ADDRESS,:CITY,:MARITAL_STATUS,:GENDER,:BIRTHDATE,:REG_BY,sysdate);
+
+
+Insert into checkin (pid,name,checkin_no,room,checkin_by,in_time) values(:PATIENTID,checkin_seq.nextval,:ROOM,:CHECKIN_NO,:CHECKIN_BY,sysdate);
+
+update checkin set out_time=:OUT_TIME where pid=:PID AND checkin_no=:CHECKIN_NO;
+
+
+select * from checkin where pid=:PID;
+
+======================================================================
+
+insert into treatment (pid,checkin_no,tr_no,tr_date,checkup_by,medical_pre,lab_pre,suggestion) values(:PID,:CHECKIN_NO,:TR_NO,sysdate,:CHECKUP_BY,:MEDICAL_PRESCRIPTION,:LAB_PRESCRIPTION,:SUGGESTION);
+
+======================================================================
+
+insert into employees (emp_id,userid,emp_type,name,contact_no,address,city,marital_status,gender,birthdate,job_start) values(empid_seq.nextval,:USERID,:EMP_TYPE,:CONTACT,:ADDRESS,:CITY,:MARITAL_STATUS,:GENDER,:BIRTHDATE,:JOB_START);
+
+insert into employees (doctorid,userid,name,contact_no,address,city,gender,birthdate,info) values(empid_seq.nextval,:USERID,:CONTACT,:ADDRESS,:CITY,:GENDER,:BIRTHDATE,:INFO);
+
+
+/* removing employee is just unavaibility of employee */
+update users set avaibility=0 where userid=:USERIDL;
+
+
+update places set shift1=:EMP1, shift2=:EMP2, shift3=:EMP3 where place_id=:PLACEID;
+
+======================================================================
+
+insert into medical_bill (pid,checkin_no,med_no,med_by,med_date,med_description,cost) values(:PID,:CHECKIN_NO,:MED_NO,sysdate,:DESCRIPTION,:COST);
+
+======================================================================
+
+insert into lab_report (pid,checkin_no,laboratory_no,glucose,hemoglobin,rdc,wbc,afp,hcg,psa,lab_description,cost,laboratory_by,lab_date) values(:PID,:CHECKIN_NO,:LAB_NO,:GLUCOSE,:HEMOGLOBIN,:RDC,:WBC,:AFP,:HCG,:PSA,:DESCRIPTION,:COST,:LAB_BY,sysdate);
+
+======================================================================
+
+insert into bill(pid,checkin_no,bill_no,bill_by,bill_date,doctor_fee,room_fee,lab_fee,medical_fee,op_fee,other_fee) values
+(:PID,:CHECKIN_NO,:BILL_NO,:BILL_BY,DOCTOR_FEE,:ROOM_FEE,:LAB_FEE,:MEDICAL_FEE,:OP_FEE,:OTHER_FEE);
+
+======================================================================
+
+select * from employee where empid=:EMPID;
+select * from doctor where doctorid=:DOCTORID;
+select * from checkin where pid=:PID;
+select * from checkin where pid=:PID;
+

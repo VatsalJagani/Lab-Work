@@ -1,0 +1,26 @@
+create table Challan_header (
+	challan_no varchar2(6) primary key,
+	s_order_no varchar2(6) references salse_order(s_order_no),
+	challan_date date not null,
+	billed_yn char(1) default 'N' check(billed_yn in ('Y','N'))
+	
+);
+
+create table challandetails(
+	challan_no varchar2(6) primary key,
+	product_no varchar2(6) references product_master(product_no),
+	qty_disp number(4,2) not null
+);
+
+
+
+alter table client_master add primary key (client_no);
+
+alter table client_master add (phone_no number(10));
+
+alter table product_master modify (description not null, profit_percent not null, sell_price not null, cost_price not null);
+
+alter table client_master modify (client_no varchar2(10));
+
+select product_no,description from product_master where profit_percent between 20 AND 30;
+

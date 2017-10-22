@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+
+typedef struct mydata{
+	int a;
+	char*s;
+}data;
+
+void *fun();
+
+
+main(){
+	data d;
+	d.a=5;
+	d.s="hi, how are u?";
+	pthread_t t1;
+	pthread_create(&t1,NULL,fun,&d);
+	pthread_join(t1,NULL); 
+}
+
+void *fun(void *s){
+	data *a=(data *)s;
+	printf("%d\t",a->a);
+	printf("%s\n",a->s);
+}
+

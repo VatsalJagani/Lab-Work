@@ -1,0 +1,17 @@
+Host: 127.0.0.1
+Username: student
+Password: student
+Database name: student
+Execute all codes in following sequence for better understanding:
+check_driver.php
+create_table.php
+connection.php
+insert.php
+selectdata.php
+all_select.php
+assoc_select.php
+num_select.php
+obj_select.php
+class_select.php
+prepared.php
+row_count.php

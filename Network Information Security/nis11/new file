@@ -1,0 +1,178 @@
+i=imread('/home/user1/Desktop/Images/Desert.jpg');
+
+
+whos i
+Name        Size                  Bytes  Class    Attributes
+
+  i         768x1024x3            2359296  uint8
+  
+  
+j=rgb2gray(i);
+>> whos j
+  Name        Size               Bytes  Class    Attributes
+
+  j         768x1024            786432  uint8
+  
+  
+>> figure,imshow(j);
+
+doc imread     	//help
+
+
+msg='hellolab11';
+
+>> dec2bin(10,8)  //in 8 bit binary
+
+>> dec2bin(10,8)
+
+ans =
+
+00001010
+
+>> x=dec2bin(msg)
+
+x =
+
+1101000
+1100101
+1101100
+1101100
+1101111
+1101100
+1100001
+1100010
+0110001
+0110001
+
+>> >> x=dec2bin(msg,8)
+
+x =
+
+01101000
+01100101
+01101100
+01101100
+01101111
+01101100
+01100001
+01100010
+00110001
+00110001
+
+>> 
+
+>> a=[1 2 3 4 5 6 7 8 9]
+
+a =
+
+     1     2     3     4     5     6     7     8     9
+
+>> a=[1 2 3; 4 5 6; 7 8 9]
+
+a =
+
+     1     2     3
+     4     5     6
+     7     8     9
+
+>> b=a(:)
+
+b =
+
+     1
+     4
+     7
+     2
+     5
+     8
+     3
+     6
+     9
+
+>> 
+>> b=a'
+
+b =
+
+     1     4     7
+     2     5     8
+     3     6     9
+
+>> b=a(:)
+
+b =
+
+     1
+     4
+     7
+     2
+     5
+     8
+     3
+     6
+     9
+
+>> a=b(:)
+
+a =
+
+     1
+     4
+     7
+     2
+     5
+     8
+     3
+     6
+     9
+
+>> b=a'
+
+b =
+
+     1     4     7     2     5     8     3     6     9
+
+>> 
+
+01101000011001010110110001101100011011110110110001100001011000100011000100110001
+
+>> whos w
+  Name      Size            Bytes  Class    Attributes
+
+  w         1x80              160  char               
+
+>> 
+
+
+bitget(41,1)   // in biunary of 41 LSB
+
+
+
+
+
+
+
+i=imread('/home/user1/Desktop/Images/Desert.jpg');
+
+j=rgb2gray(i);
+msg='hellolab11';
+x=dec2bin(msg,8);
+y=x';
+z=y(:);
+w=z';
+
+
+k=j;
+
+K=1;
+for I:768
+	for J:1024
+		t=j(I,J);
+		lsb=bitget(t,1);
+		if(w(K)=='1')
+			k(I,J)=bitset(t,1,1);
+		else
+			k(I,J)=bitset(t,1,0);
+		end
+	end
+end

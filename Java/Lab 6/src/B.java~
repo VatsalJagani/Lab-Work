@@ -1,0 +1,8 @@
+package pack2;
+class B
+{
+	public void dispB()
+	{
+		System.out.println("in Class B");
+	}
+}

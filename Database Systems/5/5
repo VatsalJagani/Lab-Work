@@ -1,0 +1,46 @@
+
+
+
+select * from astudent,adepartment;
+select * from astudent,adepartment where astudent.dept_id=adepartment.dept_id;
+select * from astudent natural join adepartment;
+select * from astudent join adepartment using (dept_id);
+select * from astudent s join adepartment d on s.dept_id=d.dept_id;
+select * from astudent s left join adepartment d on s.dept_id=d.dept_id where s.dept_id is null;
+--select * from astudent where dept_id is null;
+select * from astudent s right join adepartment d using(dept_id);
+select * from astudent s full join adepartment d using(dept_id);
+
+
+
+
+=====1======
+select distinct product_no from salse_order_details where s_order_no in(select distinct s_order_no from salse_order where client_no in (select client_no from client_master where name='Ivan Sayross'));
+
+
+select description from product_master where product_no=(select product_no from salse_order_details D join salse_order S on S.s_order_no=D.s_order_no where C.client_no=(select client_no from client_master where name='Ivan Sayross'));
+
+select distinct p.description from client_master c natural join salse_order so natural join salse_order_details natural join poduct_master p where c.name='Ivan';
+
+=====================================
+
+===========2==============
+select product_no,qty_disp from salse_order_details natural join salse_order where dely_date<sysdate;                   
+========================================
+
+======3=========
+
+=======================================
+
+=============4===========
+select name from client_master where client_no in (select client_no from salse_order natural join salse_order_details where product_no=(select product_no from product_master where description='CD DRIVE'));
+========================================
+
+=========5============
+select product_no,s_order_no from salse_order_details 
+========================================
+
+
+
+
+

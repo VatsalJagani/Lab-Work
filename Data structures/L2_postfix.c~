@@ -1,0 +1,102 @@
+#include<stdio.h>
+static int top=-1;
+char s[100]={'\0'};
+	
+int push(char s[],int top,char n)
+{
+	int x;
+	if(top>=100)
+	{
+		printf("Stack overflow\n");
+		return;
+	}
+	else
+	{
+		top++;
+		s[top]=x;
+	}
+	return(top);
+}
+
+char pop(char s[],int top)
+{
+	char x;
+	if(top==0)
+	{
+	   printf("Underflow\n");
+	   return;
+	}
+	else
+	{
+	   x=s[top];
+	   top--;	 
+	}
+	return(x);
+}	
+
+/*void print(char s[],int n)
+{
+	int i;
+	for(i=0;i<top;i++)
+	{
+	   printf("%d\n",s[i]);
+	}
+}
+*/
+
+
+void main()
+{
+	char exp[20],next,t1,t2,res;
+	int i=0;
+	printf("Enter Your expression in postfix form = ");
+	gets(exp);
+
+	next=exp[0];
+	
+	while(next != '\0')
+	{
+		i++;
+		if(next >= 48 && next <= 57 )
+		{
+			push(s,top,next);
+			next=exp[i];			
+		}
+		else if(next == '*')
+		{
+			t1=pop(s,top);
+			t2=pop(s,top);
+			res =res + ((t1)*(t2));
+			push(s,top,(char)res);
+			next = exp[i];
+		}
+		else if(next == '+')
+		{
+			t1=pop(s,top);
+			t2=pop(s,top);
+			res =res + ((t1)+(t2));
+			push(s,top,(char)res);
+			next = exp[i];
+		}
+		else if(next == '-')
+		{
+			t1=pop(s,top);
+			t2=pop(s,top);
+			res =res + ((t1)-(t2));
+			push(s,top,(char)res);
+			next = exp[i];
+		}
+		else if (next == '/')
+		{
+			t1=pop(s,top);
+			t2=pop(s,top);
+			res =res + ((t1)/(t2));
+			push(s,top,(char)res);
+			next = exp[i];
+		}
+		else 
+		break;
+	}
+res = 'pop(s,top)' - 48;
+printf("Answer is %d",res);
+}

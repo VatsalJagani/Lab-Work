@@ -1,0 +1,33 @@
+/*<html>
+<applet code="LifeCycle" width=200 height=200>
+</applet>
+</html>
+*/
+
+
+import java.awt.*;
+import java.applet.*;
+
+public class LifeCycle extends Applet
+{
+        String s="Life Cycle -->";
+        public void init()
+        {
+                s+="Init called -->";
+        }
+        public void paint(Graphics g)
+        {
+                g.drawString(s,10,10);
+        }
+        public void start()
+        {
+                s+="Start called -->";
+        }
+        public void stop()
+        {
+                s+="stop called -->";
+        }
+        public void distroy()
+        {
+        }
+}

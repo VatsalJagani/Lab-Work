@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <pthread.h>
+
+void *fun();
+
+main(){
+	pthread_t t1;
+	int x=pthread_create(&t1,NULL,fun,NULL);
+	pthread_join(t1,NULL); 
+}
+
+void *fun(){
+	printf("Hello \n");
+}

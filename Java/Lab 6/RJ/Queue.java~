@@ -1,0 +1,48 @@
+/*Write a program to create a queue with two operations : Dequeue and Enqueue. Write custom exception classes UnderFlowException and OverFlowException to indicate underflow and overflow of queue respectively(override toString() method in both classes). Write dequeue and enqueue methods such that when underflow or overflow occur, it will throw appropriate custom exception.
+Write a DemoCustomException class which contain main method to handle CustomException (i.e. UnderFlowException and OverFlowException)*/
+
+import java.util.*;
+
+class Queue
+{
+	int q[];
+	int f=0,r=0,size;
+	Queue()
+	{
+		q[]=new int[10];
+		size=10;
+	}
+	Queue(int size)
+	{
+		q[]=new int[size];
+		this.size=size;
+	}
+	
+	void enQueue(int x) throws OverFlowException
+	{
+		if(r > size)
+		{
+			OverFlowException e = new OverFlowException(r);
+		}
+		r++;
+		q[r]=x;
+		if(f==0)
+		{
+			f++;
+		}
+	}
+	
+	void dnQueue() throws UnderFlowException
+	{
+		if(f==-1)
+		{
+			UnderFlowException e = new UnderFlowException(r);
+		}
+		int y=q[f];
+		if(f==r)
+			f=r=-1
+		else
+			f++;
+		return y;
+	}
+}

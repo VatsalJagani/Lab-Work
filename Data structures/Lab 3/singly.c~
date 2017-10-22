@@ -1,0 +1,24 @@
+#include<stdio.h>
+typedef struct order
+{
+	int data;
+	struct order *next;
+}node;
+node *start = NULL;
+void insert()
+{
+	int a;
+	node *ptr;
+	ptr = (node *)malloc(sizeof(node));
+	if (start == NULL)
+	{
+	ptr->data = 5;
+	start=ptr;
+	ptr->next=NULL;
+	}
+}
+void main()
+{
+	insert();
+	printf("%d",start->data);
+}

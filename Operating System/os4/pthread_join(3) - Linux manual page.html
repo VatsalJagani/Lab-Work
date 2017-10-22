@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <link rel="stylesheet" type="text/css" href="pthread_join%283%29%20-%20Linux%20manual%20page_files/style_002.css" title="style">
+    <link rel="stylesheet" type="text/css" href="pthread_join%283%29%20-%20Linux%20manual%20page_files/style.css" title="style">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <title>pthread_join(3) - Linux manual page</title>
+</head>
+
+<body>
+
+<div class="page-top"><a id="top_of_page"></a></div>
+<!--%%%TOP_BAR%%%-->
+    <div class="nav-bar">
+        <table class="nav-table">
+            <tbody><tr>
+                <td class="nav-cell">
+                    <p class="nav-text">
+                        <a href="http://man7.org/index.html">man7.org</a> &gt; Linux &gt; <a href="http://man7.org/linux/man-pages/index.html">man-pages</a>
+                    </p>
+                </td>
+                <td class="training-cell">
+                    <p class="training-text"><a class="training-link" href="http://man7.org/training/">Linux/UNIX system programming training</a></p>
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+
+<hr class="nav-end">
+
+<!--%%%PAGE_START%%%-->
+
+
+<table class="sec-table">
+<tbody><tr>
+    <td>
+        <p class="section-dir">
+<a href="#NAME">NAME</a> | <a href="#SYNOPSIS">SYNOPSIS</a> | <a href="#DESCRIPTION">DESCRIPTION</a> | <a href="#RETURN%C2%A0VALUE">RETURN&nbsp;VALUE</a> | <a href="#ERRORS">ERRORS</a> | <a href="#ATTRIBUTES">ATTRIBUTES</a> | <a href="#CONFORMING%C2%A0TO">CONFORMING&nbsp;TO</a> | <a href="#NOTES">NOTES</a> | <a href="#EXAMPLE">EXAMPLE</a> | <a href="#SEE%C2%A0ALSO">SEE&nbsp;ALSO</a> | <a href="#COLOPHON">COLOPHON</a>
+        </p>
+    </td>
+    <td class="search-box">
+        <div class="man-search-box">
+
+            <form method="get" action="http://www.google.com/search">
+                <fieldset class="man-search">
+                    <input name="q" size="10" maxlength="255" type="text">
+                    <input name="sitesearch" value="man7.org/linux/man-pages" type="hidden">
+                    <input name="sa" value="Search online pages" type="submit">
+                </fieldset>
+            </form>
+
+        </div>
+    </td>
+    <td> </td>
+</tr>
+</tbody></table>
+
+<pre><span class="headline">PTHREAD_JOIN(3)           Linux Programmer's Manual          PTHREAD_JOIN(3)</span>
+</pre>
+<h2><a id="NAME" href="#NAME"></a>NAME  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>       pthread_join - join with a terminated thread
+</pre>
+<h2><a id="SYNOPSIS" href="#SYNOPSIS"></a>SYNOPSIS  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>       <b>#include &lt;pthread.h&gt;</b>
+
+       <b>int pthread_join(pthread_t </b><i>thread</i><b>, void **</b><i>retval</i><b>);</b>
+
+       Compile and link with <i>-pthread</i>.
+</pre>
+<h2><a id="DESCRIPTION" href="#DESCRIPTION"></a>DESCRIPTION  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>       The <b>pthread_join</b>() function waits for the thread specified by <i>thread</i>
+       to terminate.  If that thread has already terminated, then
+       <b>pthread_join</b>() returns immediately.  The thread specified by <i>thread</i>
+       must be joinable.
+
+       If <i>retval</i> is not NULL, then <b>pthread_join</b>() copies the exit status of
+       the target thread (i.e., the value that the target thread supplied to
+       <a href="http://man7.org/linux/man-pages/man3/pthread_exit.3.html">pthread_exit(3)</a>) into the location pointed to by <i>*retval</i>.  If the
+       target thread was canceled, then <b>PTHREAD_CANCELED </b>is placed in
+       <i>*retval</i>.
+
+       If multiple threads simultaneously try to join with the same thread,
+       the results are undefined.  If the thread calling <b>pthread_join</b>() is
+       canceled, then the target thread will remain joinable (i.e., it will
+       not be detached).
+</pre>
+<h2><a id="RETURN_VALUE" href="#RETURN_VALUE"></a>RETURN VALUE  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>       On success, <b>pthread_join</b>() returns 0; on error, it returns an error
+       number.
+</pre>
+<h2><a id="ERRORS" href="#ERRORS"></a>ERRORS  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>       <b>EDEADLK</b>
+              A deadlock was detected (e.g., two threads tried to join with
+              each other); or <i>thread</i> specifies the calling thread.
+
+       <b>EINVAL </b><i>thread</i> is not a joinable thread.
+
+       <b>EINVAL </b>Another thread is already waiting to join with this thread.
+
+       <b>ESRCH  </b>No thread with the ID <i>thread</i> could be found.
+</pre>
+<h2><a id="ATTRIBUTES" href="#ATTRIBUTES"></a>ATTRIBUTES  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>       For an explanation of the terms used in this section, see
+       <a href="http://man7.org/linux/man-pages/man7/attributes.7.html">attributes(7)</a>.
+
+       ┌───────────────┬───────────────┬─────────┐
+       │<b>Interface      </b>│ <b>Attribute     </b>│ <b>Value   </b>│
+       ├───────────────┼───────────────┼─────────┤
+       │<b>pthread_join</b>() │ Thread safety │ MT-Safe │
+       └───────────────┴───────────────┴─────────┘
+</pre>
+<h2><a id="CONFORMING_TO" href="#CONFORMING_TO"></a>CONFORMING TO  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>       POSIX.1-2001, POSIX.1-2008.
+</pre>
+<h2><a id="NOTES" href="#NOTES"></a>NOTES  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>       After a successful call to <b>pthread_join</b>(), the caller is guaranteed
+       that the target thread has terminated.
+
+       Joining with a thread that has previously been joined results in
+       undefined behavior.
+
+       Failure to join with a thread that is joinable (i.e., one that is not
+       detached), produces a "zombie thread".  Avoid doing this, since each
+       zombie thread consumes some system resources, and when enough zombie
+       threads have accumulated, it will no longer be possible to create new
+       threads (or processes).
+
+       There is no pthreads analog of <i>waitpid(-1, &amp;status, 0)</i>, that is,
+       "join with any terminated thread".  If you believe you need this
+       functionality, you probably need to rethink your application design.
+
+       All of the threads in a process are peers: any thread can join with
+       any other thread in the process.
+</pre>
+<h2><a id="EXAMPLE" href="#EXAMPLE"></a>EXAMPLE  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>       See <a href="http://man7.org/linux/man-pages/man3/pthread_create.3.html">pthread_create(3)</a>.
+</pre>
+<h2><a id="SEE_ALSO" href="#SEE_ALSO"></a>SEE ALSO  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>       <a href="http://man7.org/linux/man-pages/man3/pthread_cancel.3.html">pthread_cancel(3)</a>, <a href="http://man7.org/linux/man-pages/man3/pthread_create.3.html">pthread_create(3)</a>, <a href="http://man7.org/linux/man-pages/man3/pthread_detach.3.html">pthread_detach(3)</a>,
+       <a href="http://man7.org/linux/man-pages/man3/pthread_exit.3.html">pthread_exit(3)</a>, <a href="http://man7.org/linux/man-pages/man3/pthread_tryjoin_np.3.html">pthread_tryjoin_np(3)</a>, <a href="http://man7.org/linux/man-pages/man7/pthreads.7.html">pthreads(7)</a>
+</pre>
+<h2><a id="COLOPHON" href="#COLOPHON"></a>COLOPHON  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>       This page is part of release 4.07 of the Linux <i>man-pages</i> project.  A
+       description of the project, information about reporting bugs, and the
+       latest version of this page, can be found at
+       <a href="https://www.kernel.org/doc/man-pages/">https://www.kernel.org/doc/man-pages/</a>.
+
+<span class="footline">Linux                            2015-07-23                  PTHREAD_JOIN(3)</span>
+</pre>
+
+<hr class="end-man-text">
+
+<p class="page-copyright"><a href="http://man7.org/linux/man-pages/man3/pthread_join.3.license.html">Copyright and license for this manual page</a></p> 
+<hr class="start-footer">
+
+<div class="footer"> 
+
+<table class="colophon-table">
+    <tbody><tr>
+    <td class="pub-info">
+        <p>
+            HTML rendering created 2016-08-07
+            by <a href="http://man7.org/mtk/index.html">Michael Kerrisk</a>, 
+            author of 
+            <a href="http://man7.org/tlpi/"><em>The Linux Programming Interface</em></a>, 
+            maintainer of the 
+            <a href="https://www.kernel.org/doc/man-pages/">Linux <em>man-pages</em> project</a>.
+        </p>
+        <p>
+            For details of in-depth
+            <strong>Linux/UNIX system programming training courses</strong>
+            that I teach, look <a href="http://man7.org/training/">here</a>.
+        </p>
+        <p>
+            Hosting by <a href="http://www.jambit.com/index_en.html">jambit GmbH</a>.
+        </p>
+        <p>
+            <a href="http://validator.w3.org/check?uri=referer">
+            <img src="pthread_join%283%29%20-%20Linux%20manual%20page_files/valid-xhtml11.png" alt="Valid XHTML 1.1" height="31" width="88">
+            </a>
+        </p>
+    </td>
+    <td class="colophon-divider">
+    </td>
+    <td class="tlpi-cover">
+        <a href="http://man7.org/tlpi/"><img src="pthread_join%283%29%20-%20Linux%20manual%20page_files/TLPI-front-cover-vsmall.png" alt="Cover of TLPI"></a>
+    </td>
+    </tr>
+</tbody></table>
+
+</div>
+
+<hr class="end-footer">
+
+
+
+<!--BEGIN-SITETRACKING-->
+<!-- SITETRACKING.man7.org_linux_man-pages -->
+
+<!-- Start of StatCounter Code (xhtml) -->
+
+<script src="pthread_join%283%29%20-%20Linux%20manual%20page_files/ga.js" async="" type="text/javascript"></script><script type="text/javascript">
+//<![CDATA[
+var sc_project=7422636; 
+var sc_invisible=1; 
+var sc_security="9b6714ff"; 
+//]]>
+</script>
+<script type="text/javascript" src="pthread_join%283%29%20-%20Linux%20manual%20page_files/counter_xhtml.js"></script>
+<noscript><div class="statcounter"><a title="website
+statistics" href="http://statcounter.com/"
+class="statcounter"><img class="statcounter"
+src="http://c.statcounter.com/7422636/0/9b6714ff/1/"
+alt="website statistics" /></a></div></noscript>
+
+<!-- End of StatCounter Code -->
+
+
+<!-- Start of Google Analytics Code -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-9830363-8']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<!-- End of Google Analytics Code -->
+
+<!--END-SITETRACKING-->
+
+
+
+</body></html>

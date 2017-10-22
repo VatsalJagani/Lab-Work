@@ -1,0 +1,53 @@
+import java.awt.*;
+import java.applet.*;
+import java.awt.event.*;
+/*<html>
+ * <applet code="ColorDemo" width=500 height=500>
+ * </applet>
+ * </html>*/
+
+public class ColorDemo extends Applet implements AdjustmentListener
+{
+	Label l1,l2,l3;
+	Canvas c;
+	Scrollbar sc1,sc2,sc3;
+
+	public void init()
+	{
+		l1=new Label("RED");
+		l2=new Label("GREEN");
+		l3=new Label("BLUE");
+
+		sc1=new Scrollbar(Scrollbar.HORIZONTAL,255,5,0,255);
+		sc2=new Scrollbar(Scrollbar.HORIZONTAL,0,5,0,255);
+		sc3=new Scrollbar(Scrollbar.HORIZONTAL,0,5,0,255);
+
+		c=new Canvas();
+		c.setSize(100,100);
+		p1.setLayout(new GridLayout(3,2));
+		add(l1);
+		add(sc1);
+		add(l2);
+                add(sc2);
+		add(l3);
+                add(sc3);
+		add(c);
+
+		sc1.addAdjustmentListener(this);
+		sc2.addAdjustmentListener(this);
+		sc3.addAdjustmentListener(this);
+	}
+
+	public void adjustmentValueChanged(AdjustmentEvent ae)
+	{
+		int r=sc1.getValue();
+		int g=sc2.getValue();
+		int b=sc3.getValue();
+
+		Color col=new Color(r,g,b);
+		c.setBackground(col);
+		c.repaint();
+	}
+}
+
+
