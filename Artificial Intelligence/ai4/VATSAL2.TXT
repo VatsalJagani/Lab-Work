@@ -1,0 +1,27 @@
+predicates
+	go(integer)
+	start
+	login(symbol,symbol)
+	login_success
+	login_fail
+clauses
+	start:-
+		go(0).
+		
+	go(3):-
+		write("3 attempts limit over, your account has been blocked."),nl.
+	go(X):-
+		write("Enter UserName:"),
+		readln(User),
+		write("Enter Password:"),
+		readln(Pass),
+		login(User,Pass);
+		login_fail,
+		Y=X+1,
+		go(Y).
+	login("Vatsal","Jagani"):-
+		login_success.
+	login_success:-
+		write("Logged_In successful."),nl.
+	login_fail:-
+		write("Wrong username or password. Retry."),nl.

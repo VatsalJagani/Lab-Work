@@ -1,0 +1,14 @@
+%%
+[a-zA-Z]	yytext[]
+%%
+
+int yywrap(){
+	return();
+}
+
+int main()
+{
+	yytext=fopen(".l","r");
+	yylex();
+	return ;
+}

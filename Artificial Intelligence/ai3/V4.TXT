@@ -1,0 +1,78 @@
+predicates
+	hypothesis(symbol,symbol)
+	habit(symbol,symbol)
+	response(symbol)
+	go
+clauses
+	go :-
+		write("What is the patient's name? "),
+		readln(User),
+		hypothesis(User,Health),
+		write(User,"probably has ",Health,"Health."),nl.
+	go :-
+		write("Sorry, I don't seem to be able to"),nl,
+		write("diagnose the disease."),nl.
+
+	habit(User,smoking) :-
+		write("Does ",User," has habit of regular smoking (y/n) ?"),
+		response(Reply),
+		Reply='y'.
+	habit(User,drinking) :-
+		write("Does ",User," has habit of drinking (y/n) ?"),
+		response(Reply),
+		Reply='y'.
+	habit(User,drug) :-
+		write("Does ",User," has habit of taking drug (y/n) ?"),
+		response(Reply),
+		Reply='y'.
+	habit(User,oily_food_sugar) :-
+		write("Does ",User," has habit of eating oily food and taking too much sugar with food (y/n) ?"),
+		response(Reply),
+		Reply='y'.
+	habit(User,milk) :-
+		write("Does ",User," has habit of drinking milk, eating green vegitables (y/n) ?"),
+		response(Reply),
+		Reply='y'.
+	habit(User,exercise) :-
+		write("Does ",User," has habit of regular exercise and regular sufficient sleep hours. (y/n) ?"),
+		response(Reply),
+		Reply='y'.
+	habit(User,clean) :-
+		write("Does ",User," has habit of brushing teeth and washing hair and using showers regularly. (y/n) ?"),
+		response(Reply),
+		Reply='y'.
+	habit(User,oily_food_walk) :-
+		write("Does ",User," has habit of eating oily food and regular walk. (y/n) ?"),
+		response(Reply),
+		Reply='y'.
+	habit(User,sugar_walk) :-
+		write("Does ",User," has habit of excessive sugar and regular walk. (y/n) ?"),
+		response(Reply),
+		Reply='y'.
+	habit(User,oily_food_exercise) :-
+		write("Does ",User," has habit of eating oily food and daily exercise. (y/n) ?"),
+		response(Reply),
+		Reply='y'.
+	habit(User,sugar_exercise) :-
+		write("Does ",User," has habit of excessive sugar and daily exercise. (y/n) ?"),
+		response(Reply),
+		Reply='y'.
+
+
+	hypothesis(User,bad) :-
+		habit(User,smoking),
+		habit(User,drinking),
+		habit(User,drug),
+		habit(User,oily_food_sugar).
+
+	hypothesis(User,good) :-
+		habit(User,milk),
+		habit(User,exercise),
+		habit(User,clean).
+
+	hypothesis(User,moderate) :-
+		habit(User,oily_food_walk),
+		habit(User,sugar_walk),
+		habit(User,oily_food_exercise),
+		habit(User,sugar_exercise).
+

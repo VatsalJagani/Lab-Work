@@ -1,0 +1,15 @@
+predicates
+	prime(integer)
+	divisible(integer,integer)
+clauses
+	prime(1):-
+		write("1 is special Number"),nl,!,fail.
+	prime(X):-
+		divisible(2,X).
+	divisible(X,X).
+	divisible(I,X):-
+		not((X mod I)=0),!,
+		J=I+1,
+		divisible(J,X).
+	divisible(_,_):-
+		fail.

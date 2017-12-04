@@ -1,0 +1,9 @@
+img1=imread('cameraman.tif');
+img2=imread('coloredChips.png');
+img2=rgb2gray(img2);
+img2=imcrop(img2,[0,0,256,256]);
+sum=img1+img2;
+imshow(sum);
+figure;
+sub=img1-img2;
+imshow(sub);

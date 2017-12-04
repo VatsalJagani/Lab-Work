@@ -1,0 +1,13 @@
+predicates
+	go
+clauses
+	go:-
+	clearwindow,
+	write("Name :"),
+	write("::"),
+	readln(Name),
+	write("Are you a human(y/n):"),
+	readchar(Response),nl,
+	write("Enter your age:"),readint(Age),nl,
+	write("Enter your CPI:"),readreal(CPI),nl,
+	writef("%-10#%2#%5.3#%5.2",Name,Response,Age,CPI).

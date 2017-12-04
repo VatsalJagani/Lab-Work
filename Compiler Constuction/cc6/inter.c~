@@ -1,0 +1,174 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MX 100
+#define NO_OF_OP 4
+
+typedef struct stackStruck{
+	char arr[MX];
+	int top;
+}stack;
+
+char pop(stack *s){
+	return s->arr[--s->top];
+}
+char peek(stack *s){
+	return s->arr[s->top];
+}
+void push(stack *s,char c){
+	s->arr[s->top++]=c;
+}
+
+char operation[]={'+','-','*','/'};
+int precedence[]={1,1,2,2};
+stack *S;
+char *postfix;
+
+int getPrecedence(char c){
+	int i=0;	
+	for(i=0;i<NO_OF_OP;i++){
+		if(operation[i]==c){
+			return precedence[i];
+		}
+	}
+	return 0;
+}
+
+int checkOperation(char c){
+	// 0 for operand
+	// 1 for operation
+	int i=0;	
+	for(i=0;i<NO_OF_OP;i++){
+		if(operation[i]==c){
+			return 1;
+		}
+	}
+	return 0;
+}
+
+void solvePostFixTriple(char *str){
+	printf("\n:: Triple ::\n");	
+	int i=0;
+	int lineNo=1;
+	while(*(str+i)!='\0'){
+		char w=*(str+i);
+//		printf("%c",w);
+		if(checkOperation(w)){
+			char no2=pop(S);
+			char no1=pop(S);
+			printf("%c, %c, %c\n",w,no1,no2);
+			push(S,lineNo+'0');
+			lineNo++;
+		}
+		else{
+			push(S,w);
+		}
+		i++;
+	}
+}
+
+void solvePostFixQuadruple(char *str){
+	printf("\n:: Quadruple ::\n");	
+	int i=0;
+	int lineNo=0;
+	while(*(str+i)!='\0'){
+		char w=*(str+i);
+//		printf("%c",w);
+		if(checkOperation(w)){
+			char no2=pop(S);
+			char no1=pop(S);
+			printf("%c, %c, %c, %c\n",w,no1,no2,lineNo+'A');
+			push(S,lineNo+'A');
+			lineNo++;
+		}
+		else{
+			push(S,w);
+		}
+		i++;
+	}
+}
+
+void InfixToPostfix(char a[],char b[]);
+
+main(){
+	S=(stack*)malloc(sizeof(stack));
+	char infix[MX]={'a','+','b','*','c','-','d','/','e','\0'}, postfix[MX];
+	printf("InFix : %s\n",infix);
+	InfixToPostfix(infix,postfix);
+	printf("PostFix : %s\n",postfix);
+	solvePostFixTriple(postfix);
+	solvePostFixQuadruple(postfix);
+}
+
+void InfixToPostfix(char infix_exp[], char postfix_exp[])
+{ 
+	int i, j;
+	char item;
+	char x;
+
+	push(S,'(');
+	strcat(infix_exp,")"); 
+
+	i=0;
+	j=0;
+	item=infix_exp[i];     
+	while(item != '\0')    {
+		if(item == '(')
+		{
+			push(S,item);
+		}
+		else if( isdigit(item) || isalpha(item))
+		{
+			postfix_exp[j] = item;
+			j++;
+		}
+		else if(checkOperation(item) == 1)
+		{
+			x=pop(S);
+			while(checkOperation(x) == 1 && getPrecedence(x)>= getPrecedence(item))
+			{
+				postfix_exp[j] = x;                  
+				j++;
+				x = pop(S);                       
+			}
+			push(S,x);
+			push(S,item);                 
+		}
+		else if(item == ')')         
+		{
+			x = pop(S);                  
+			while(x != '(')              
+			{
+				postfix_exp[j] = x;
+				j++;
+				x = pop(S);
+			}
+		}
+		else
+		{ 
+			printf("\nInvalid infix Expression.\n");       
+			getchar();
+			exit(1);
+		}
+		i++;
+
+
+		item = infix_exp[i]; 
+	} 
+	if(S->top>0)
+	{
+		printf("\nInvalid infix Expression.\n");       
+		getchar();
+		exit(1);
+	}
+	if(S->top>0)
+	{
+		printf("\nInvalid infix Expression.\n");       
+		getchar();
+		exit(1);
+	}
+
+	postfix_exp[j] = '\0'; 
+
+}

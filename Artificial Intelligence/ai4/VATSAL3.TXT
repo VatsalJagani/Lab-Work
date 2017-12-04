@@ -1,0 +1,13 @@
+predicates
+	sum(integer)
+	mysum(integer,integer,integer)
+clauses
+	sum(N):-
+		mysum(N,0,Result),
+		write(Result),nl.
+	mysum(0,Ac,Ac).
+	mysum(N,Ac,Result):-
+		M=N-1,
+		Ac2=Ac+N,
+		mysum(M,Ac2,Result).
+		

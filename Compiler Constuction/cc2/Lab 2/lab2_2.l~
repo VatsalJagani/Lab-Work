@@ -1,0 +1,21 @@
+%{
+	int ch=0;
+%}
+letter [a-zA-Z]
+%%
+
+{letter}	ch++;
+%%
+int main(int argc,char *argv[])
+{
+	yyin=fopen(argv[1],"r");
+	yylex();
+	fclose(yyin);
+	printf("Number of characters :%d",ch);
+	return 0;
+}
+int yywrap(void) 
+{
+	return 1;
+}
+

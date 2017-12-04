@@ -1,0 +1,8 @@
+predicates
+	max(integer,integer,integer)
+clauses
+	max(X,Y,Max):-
+		X>Y,!,
+		Max=X.
+	max(_,Y,Max):-
+		Max=Y.

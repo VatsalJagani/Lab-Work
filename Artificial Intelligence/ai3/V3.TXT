@@ -1,0 +1,36 @@
+predicates
+	go
+	color(symbol,symbol)
+clauses
+	go:-
+	write("Enter Name : "),
+	readln(Name),
+	write("Enter favorite color : "),
+	readln(Color),
+	color(Name,Color).
+
+	color(Name,red):-
+		write(Name," is very social, assertive & energetic. But at the same time, ",Name," is also moody and impulsive. ",Name," feels deep sympathy for fellow human beings and are easily swayed. You are an optimist, but you are also a complainer and do not desist from voicing your complaints or discomforts.").
+
+	color(Name,yellow):-
+	write("You are very imaginative and have a strong urge to help the world. You are inclined to speak of lofty ideas without applying them in practical."),write(" Secretly, you are shy, wish to be respected, crave admiration for your wisdom and are a mental loner. You are a safe friend in whom people can confide their secrets and problems. ").
+	
+	color(Name,orange):-
+	write("You are good natured, enjoy being with others and are swayed by outside opinions. You do good work, have strong loyalties, and are very good at heart.").
+
+	color(Name,green):-
+	write("You are a good citizen and a pillar of the community and are sensitive to social customs and etiquette. You are frank, moral and reputable. You make yourself a splendid teacher and feel deep affection for your family. ").
+
+	color(Name,blue):-
+	write("You are deliberate and introspective. You have conservative convictions and retreat to gentler surroundings in times of stress,"),write(" but are sensitive to the feelings of others. You keep a tight rein on your passions and enthusiasms,"),write(" are a loyal friend and lead a sober life. You nourih big dreams but do not act on them. Stupidity in others annoys you, as does superior intelligence. ").
+
+	color(Name,purple):-
+	write("You have a good mind, a ready wit and an ability to observe things that go unnoticed by others. You get angry easily. You display fine-arts creativity and appreciate the subtle but recognize the magnificent. ").
+
+	color(Name,brown):-
+	write("You perform your duties very well, are clever with money matters, stubborn in your habits and convictions. You are dependable and steady, dislike impulsiveness and can bargain very well. ").
+
+	color(Name,gray):-
+	write("You are cautious, try to strike a compromise in most situations. You encounter and seek composure and peace. You try very hard to fit yourself into a mould of your own design. ").
+	color(Name,black):-
+	write("You are above average, worldly, conventional, proper, polite and regal. Black is a colour that means one thing (depression) to the clinical psychiatrist and quite another (dignity) to you. ").

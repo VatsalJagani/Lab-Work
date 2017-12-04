@@ -1,0 +1,7 @@
+//have a Lex program that reads if a given character is an alphabeta or number. 
+How to I take /*my*/ inputs directly from a file. 
+//This is my simple program. Also wh
+at would be a /*good tutorial for FlexLex
+hello
+how ARE YOU*/
+//kghjsfk

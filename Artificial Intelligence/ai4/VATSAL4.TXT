@@ -1,0 +1,12 @@
+predicates
+	fact(integer)
+	myfact(integer,integer,integer)
+clauses
+	fact(N):-
+		myfact(N,1,Result),
+		write("Factorial of ",N," is ",Result),nl.
+	myfact(1,Ac,Ac).
+	myfact(N,Ac,Result):-
+		M=N-1,
+		Ac2=Ac*N,
+		myfact(M,Ac2,Result).

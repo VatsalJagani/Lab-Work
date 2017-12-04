@@ -1,0 +1,45 @@
+domains
+	color,nature=symbol
+	User,name=string
+predicates
+	predict(string,color)
+	ask(name,nature)
+	response(char)
+	if
+clauses
+	if:-
+	write("What is the name of user?"),
+	readln(User),
+	predict(User,Color),
+	write(User ,"'s favourite color is ",Color,"."),nl.
+	
+	if:-
+	write("Sorry"),nl,
+	write("checking color."),nl.
+	
+	ask(User,red):-
+	write("Does ",User," likes red color(y/n)?"),
+	response(Reply),
+	Reply='y'.
+	
+	ask(User,yellow):-
+	write("Does ",User," likes yellow color(y/n)?"),
+	response(Reply),
+	Reply='y'.
+	
+	ask(User,orange):-
+	write("Does ",User," likes orange color(v/n)?"),
+	response(Reply),
+	Reply='y'.
+	
+	ask(User,green):-
+	write("Does ",User," likes green color(y/n)?"),
+	response(Reply),
+	Reply='y'.
+	
+	ask(User,blue):-
+	write("Does ",User," likes blue color(y/n)?"),
+	response(Reply),
+	Reply='y'.
+	
+	ask(User,purple):-

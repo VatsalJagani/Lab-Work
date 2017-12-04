@@ -1,0 +1,15 @@
+predicates
+	nth_fibonacci(integer)
+	myfibo(integer,integer)
+clauses
+	nth_fibonacci(N):-
+		myfibo(N,Result),
+		write(Result),nl.
+	myfibo(0,0).
+	myfibo(1,1).
+	myfibo(N,Result):-
+		M=N-1,
+		W=N-2,
+		myfibo(M,Result1),
+		myfibo(W,Result2),
+		Result=Result1+Result2.

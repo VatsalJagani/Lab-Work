@@ -1,0 +1,11 @@
+predicates
+	roots(float,float,float)
+clauses
+	roots(a,b,c):-
+		rt=b*b,
+		rt=rt-4*a*c,
+		rt=sqrt(rt),
+		first=(-b+rt)/(2*a),
+		second=(-b-rt)/(2*a),
+		write(first),nl,
+		write(second).

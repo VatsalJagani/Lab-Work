@@ -1,0 +1,9 @@
+predicates
+	go
+	login(symbol,symbol)
+clauses
+	go:-
+		write("Enter UserName:"),
+		readln(User)
+	login(user,pass):-
+		

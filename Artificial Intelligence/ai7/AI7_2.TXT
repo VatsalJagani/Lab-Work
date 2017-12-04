@@ -1,0 +1,35 @@
+domains
+	street,city,state=string
+	emp_details=salary(integer);department(symbol);position(symbol)
+	name=symbol
+	location=address(street,city,state)
+predicates
+	employee(symbol,location,integer,symbol,symbol)
+	get_emp_details(emp_details)
+	write_emp(symbol,location,integer,symbol,symbol)
+clauses
+	get_emp_details(salary(X)):-
+		employee(Name,Addr,Salary,Department,Position),
+		Salary>X,
+		write_emp(Name,Addr,Salary,Department,Position),
+		fail.
+	
+	get_emp_details(department(X)):-
+		employee(Name,Addr,Salary,Department,Position),
+		Department=X,
+		write_emp(Name,Addr,Salary,Department,Position),
+		fail.
+		
+	get_emp_details(position(X)):-
+		employee(Name,Addr,Salary,Department,Position),
+		Position=X,
+		write_emp(Name,Addr,Salary,Department,Position),
+		fail.
+	
+	write_emp(Name,address(_,City,_),Salary,Department,Position):-
+		write(Name," ",City," ",Salary," ",Department," ",Position),nl.
+	
+	employee("Sahdev",address("Krushna Plot","Derdi","Gujarat"),5000,"HR","CEO").
+	employee("Vatsal",address("Vivekanand Society","Derdi","Gujarat"),4000,"CE","Developer").
+	employee("Toti",address("Katargam","Surat","Gujarat"),10,"HR","Manager").
+	employee("Taliyo",address("Katargam","Surat","Gujarat"),500,"CE","Peon").

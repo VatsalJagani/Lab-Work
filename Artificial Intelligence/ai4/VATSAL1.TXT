@@ -1,0 +1,12 @@
+	
+predicates
+	roots(integer,integer,integer)
+clauses
+	roots(A,B,C):-
+		RT=B*B,
+		RT1=RT-4*A*C,
+		RT2=sqrt(RT1),
+		First=(-B+RT2)/(2*A),
+		Second=(-B-RT2)/(2*A),
+		write(First),nl,
+		write(Second).

@@ -1,0 +1,5 @@
+
+How to I take */ inputs directly from a file. 
+
+at would be a */
+
